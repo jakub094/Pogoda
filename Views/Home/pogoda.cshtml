@@ -25,7 +25,6 @@
 <div class="container-fluid with-padding">
 
     <div class="row tlo">
-        <h1 class="text-center" > AUTOR: Mirosław Kowalski</h1>
         <br>
     </div>
 
@@ -107,7 +106,7 @@
                             <tr><td><img src=@pd.img alt="ASP.NET"></td><td>@pd.czas.ToString("HH:mm")</td><td>@pd.temp_max</td><td>@pd.temp_min</td><td>@pd.pressure</td><td>@pd.humidity</td></tr>
                         }
                     }
-                }
+               
 <!--                
                 <tr><td><img src="~/img/snieg.png" alt="ASP.NET"></td><td>12:00</td><td>3</td><td>0</td><td>1020</td><td>80%</td></tr>
                 <tr><td><img src="~/img/deszcz.png" alt="ASP.NET"></td><td>15:00</td><td>1</td><td>3</td><td>1021</td><td>80%</td></tr>
@@ -116,8 +115,11 @@
             
             </table>
         </div>
-}
-        
+    }
+    <footer class="footer navbar navbar-fixed-bottom text-center footer">
+        <p>Autor projektu: Kuba Ogonowski.</p>
+    </footer>
+
     </div>
 </body>
 </html>
