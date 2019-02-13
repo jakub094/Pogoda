@@ -29,3 +29,4 @@ c:\Users\Mirek\Pogoda\obj\Debug\netcoreapp2.2\Pogoda.dll
 c:\Users\Mirek\Pogoda\obj\Debug\netcoreapp2.2\Pogoda.pdb
 c:\Users\Mirek\Pogoda\obj\Debug\netcoreapp2.2\Pogoda.csproj.CopyComplete
 c:\Users\Mirek\Pogoda\obj\Debug\netcoreapp2.2\Razor\Views\Home\myView.g.cshtml.cs
+c:\Users\Mirek\Pogoda\obj\Debug\netcoreapp2.2\Razor\Views\Home\pogoda.g.cshtml.cs
