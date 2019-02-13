@@ -1,4 +1,4 @@
-@Model IEnumerable<Pogoda.Models.PogodaData>
+@model IEnumerable<Pogoda.Models.PogodaData>
 
 
 @{
@@ -60,25 +60,34 @@
             </form>
             </div>
         </div>
+        @{int j = 0;}
         @if(Model != null) {
-        <div class="row tlo">
-            <div id="current_weather" class="col-xs-12 col-sm-10 col-md-10 col-lg-6 col-sm-offset-2 col-md-offset-2 col-lg-offset-3 ">
-                <div class="panel panel-pogoda col-xs-6 col-xs-offset-3" id="pogoda_na_dzis">
-                    <div class="panel-heading-pogoda" id="miasto">@ViewBag.City </div>
-                    <div class="panel-body text-center">
-                        <img src=@Model[0].img alt="ASP.NET" class="tlo">
-                        <p>@Model[0].mainWeather</p> 
-                        <p>@Model[0].temp_max [°C]</p> 
-                        <p>@Model[0].temp_min [°C]</p> 
-                        <p>@Model[0].pressure [hPa]</p>  
-                        <p>@Model[0].humidity [%] </p>
-                        <p>wschód słońca: @Model[0].sunRise.ToString("HH:mm:ss")</p> 
-                        <p>zachód słońca @Model[0].sunSet.ToString("HH:mm:ss")</p>                    
-                        <p>pomiar z: @Model[0].czas</p>
+
+        
+        @foreach (Pogoda.Models.PogodaData pd in Model)
+        {
+            @if(j++ == 0) 
+            {
+               <div class="row tlo">
+                    <div id="current_weather" class="col-xs-12 col-sm-10 col-md-10 col-lg-6 col-sm-offset-2 col-md-offset-2 col-lg-offset-3 ">
+                        <div class="panel panel-pogoda col-xs-6 col-xs-offset-3" id="pogoda_na_dzis">
+                            <div class="panel-heading-pogoda" id="miasto">@ViewBag.City </div>
+                            <div class="panel-body text-center">
+                                <img src=@pd.img alt="ASP.NET" class="tlo">
+                                <p>@pd.mainWeather</p> 
+                                <p>@pd.temp_max [°C]</p> 
+                                <p>@pd.temp_min [°C]</p> 
+                                <p>@pd.pressure [hPa]</p>  
+                                <p>@pd.humidity [%] </p>
+                                <p>wschód słońca: @pd.sunRise.ToString("HH:mm:ss")</p> 
+                                <p>zachód słońca @pd.sunSet.ToString("HH:mm:ss")</p>                    
+                                <p>pomiar z: @pd.czas</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            }
+        }
 
         <div id="prognoza" class="col-xs-12 col-sm-10 col-md-10 col-lg-6 col-sm-offset-2 col-md-offset-2 col-lg-offset-3 margin_dashboard ">
                 
@@ -90,11 +99,13 @@
                 </tr>
                 <tr><th>pogoda</th><th>godzina</th><th>temp. max [°C]</th><th>temp. min [°C]</th><th>ciśnienie</th><th>wilgotność</th></tr>
                 
+                    @{int i = 0;}
                     @foreach (Pogoda.Models.PogodaData pd in Model)
                     {
-                        @if(pd != @Model[0]) {
+                        @if(i++ != 0) 
+                        {
                             <tr><td><img src=@pd.img alt="ASP.NET"></td><td>@pd.czas.ToString("HH:mm")</td><td>@pd.temp_max</td><td>@pd.temp_min</td><td>@pd.pressure</td><td>@pd.humidity</td></tr>
-                          }
+                        }
                     }
                 }
 <!--                
