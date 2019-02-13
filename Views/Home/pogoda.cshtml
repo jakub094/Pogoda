@@ -8,7 +8,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title> @ViewBag.Greeting Pogoda </title>
+    <title> Pogoda </title>
     <meta charset = "utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,7 +41,7 @@
                         <label class="col-xs-6 col-xs-offset-3" id="freeLabel" for="place"> Miejscowość </label>
                         <div  class="col-xs-6 col-xs-offset-3"><input class="form-control"  placeholder="nazwa szukanej miejscowości" value="" id="place" name="city.place" type="text" maxlength="120">
                     </div>
-                    <div class="col-xs-2  col-xs-offset-0"><input class="form-control"  placeholder="country code" value="" id="countrzcode" name"city.countryCode" type="text" maxlength="20">
+                    <div class="col-xs-2  col-xs-offset-0"><input class="form-control"  placeholder="country code" value="" id="countryCode" name="city.countryCode" type="text" maxlength="20">
                     </div>
     <!--
                         <div class="checkbox checkbox-info">
@@ -88,12 +88,12 @@
                         <h3>PROGNOZA</h3>
                     </th>
                 </tr>
-                <tr><th>pogoda</th><th>godzina</th><th>temp. max</th><th>temp. min</th><th>ciśnienie</th><th>wilgotność</th></tr>
+                <tr><th>pogoda</th><th>godzina</th><th>temp. max [°C]</th><th>temp. min [°C]</th><th>ciśnienie</th><th>wilgotność</th></tr>
                 
                     @foreach (Pogoda.Models.PogodaData pd in Model)
                     {
                         @if(pd != @Model[0]) {
-                            <tr><td><img src=@pd.img alt="ASP.NET"></td><td>@pd.czas.ToString("HH:mm")</td><td>@pd.temp_min</td><td>@pd.temp_max</td><td>@pd.pressure</td><td>@pd.humidity</td></tr>
+                            <tr><td><img src=@pd.img alt="ASP.NET"></td><td>@pd.czas.ToString("HH:mm")</td><td>@pd.temp_max</td><td>@pd.temp_min</td><td>@pd.pressure</td><td>@pd.humidity</td></tr>
                           }
                     }
                 }

@@ -29,23 +29,22 @@ namespace Pogoda.Controllers
        public ViewResult Index() {
             
             int hour = DateTime.Now.Hour;
-            ViewBag.Greeting = "Brzydka";
             //https://openweathermap.org/current
 
             return View("pogoda");
         }
         [HttpGet]
         public ViewResult pogoda() {
-
-            ViewBag.Greeting = "ALA get";//city.Place;
             return View("pogoda");
         }
         [HttpPost]
         public ViewResult pogoda(City city) {
 
 
-            Globalne.city = city.place;
-            Globalne.countryCode = "pl";//city.countryCode;
+            Globalne.city = city.place.Trim();
+            Globalne.countryCode = "pl";
+            if (city.countryCode != null && city.countryCode.Trim().Length > 0)
+                Globalne.countryCode = city.countryCode.Trim();
             
             ViewBag.City = city.place;
             PogodaData pd = getPogoda();
@@ -85,7 +84,7 @@ namespace Pogoda.Controllers
 
                 streamWriter.Write(data);
             }
-
+            
             var response = request.GetResponse();
             string text;
 
@@ -104,19 +103,20 @@ namespace Pogoda.Controllers
                 Console.WriteLine("sunRise: " + ssunRise);
                 Console.WriteLine("sunSet: " + ssunRise);
 
-                ret.sunRise = DateTime.Parse(ssunRise);
-                ret.sunSet = DateTime.Parse(ssunSet);
+                ret.sunRise = DateTime.Parse(ssunRise).AddHours(1);
+                ret.sunSet = DateTime.Parse(ssunSet).AddHours(1);
                 node = doc.DocumentElement.SelectSingleNode("/current/city/coord");
+/*
                 ret.lon =   Double.Parse(node.Attributes["lon"].InnerText, 
                             System.Globalization.NumberStyles.AllowDecimalPoint,
                             System.Globalization.NumberFormatInfo.InvariantInfo).ToString("#0.00");
                 ret.lat =   Double.Parse(node.Attributes["lat"].InnerText, 
                             System.Globalization.NumberStyles.AllowDecimalPoint,
                             System.Globalization.NumberFormatInfo.InvariantInfo).ToString("#0.00");
-
+*/
                 string timeFrom = doc.DocumentElement.SelectSingleNode("/current/lastupdate").Attributes["value"].InnerText;
                 timeFrom.Replace("T", " ");
-                ret.czas = DateTime.Parse(timeFrom);
+                ret.czas = DateTime.Parse(timeFrom).AddHours(1);
                 ret.mainWeather = doc.DocumentElement.SelectSingleNode("/current/weather").Attributes["value"].InnerText;
                 ret.img = "http://openweathermap.org/img/w/" + doc.DocumentElement.SelectSingleNode("/current/weather").Attributes["icon"].InnerText +".png";
                 ret.cloudCover = doc.DocumentElement.SelectSingleNode("/current/clouds").Attributes["value"].InnerText;
